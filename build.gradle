@@ -28,6 +28,7 @@ task npmBuild(type: NpmTask) {
 npmBuild.dependsOn(npmInstall)
 
 build.dependsOn(npmBuild)
+build.mustRunAfter clean
 processResources.dependsOn(npmBuild)
 
 node {
