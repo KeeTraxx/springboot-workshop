@@ -12,17 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by ktran on 8/30/16.
  */
 @RestController
 public class MovieQuoteController {
-    private MovieQuoteRepository repository;
+    private final Random random;
+    private final MovieQuoteRepository repository;
 
     @Autowired
     public MovieQuoteController(MovieQuoteRepository repository) {
         this.repository = repository;
+        this.random = new Random();
     }
 
     @PostConstruct
@@ -36,6 +39,11 @@ public class MovieQuoteController {
     @RequestMapping(value = "/quote", method = RequestMethod.GET)
     public Iterable<MovieQuote> quote() {
         return repository.findAll();
+    }
+
+    @RequestMapping(value = "/quote/random", method = RequestMethod.GET)
+    public MovieQuote randomQuote() {
+        return repository.findOne((long)random.nextInt((int)repository.count()+1));
     }
 
 }
