@@ -17,6 +17,17 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'com.moowork.node'
 
+task stage {
+    dependsOn clean, npmInstall, build
+}
+
+task npmBuild(type: NpmTask) {
+    args = ['run', 'build']
+}
+npmBuild.dependsOn(npmInstall)
+
+build.dependsOn(npmBuild)
+
 node {
     version = '6.5.0'
     npmVersion = '3.10.3'
