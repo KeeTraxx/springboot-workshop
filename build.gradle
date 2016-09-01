@@ -18,15 +18,17 @@ apply plugin: 'spring-boot'
 apply plugin: 'com.moowork.node'
 
 task stage {
-    dependsOn clean, npmInstall, build
+    dependsOn clean, build
 }
 
 task npmBuild(type: NpmTask) {
     args = ['run', 'build']
 }
+
 npmBuild.dependsOn(npmInstall)
 
 build.dependsOn(npmBuild)
+processResources.dependsOn(npmBuild)
 
 node {
     version = '6.5.0'
