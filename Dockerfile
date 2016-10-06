@@ -13,10 +13,7 @@ USER 1001
 
 # add application source
 
-ADD ./gradlew /opt/app-root/src/
-ADD gradle /opt/app-root/src/gradle
-ADD build.gradle /opt/app-root/src/
-ADD src /opt/app-root/src/src
+ADD . /opt/app-root/src/
 
 # build
 RUN sh /opt/app-root/src/gradlew build
