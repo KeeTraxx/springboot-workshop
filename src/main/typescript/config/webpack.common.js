@@ -12,7 +12,7 @@ const helpers = require('./helpers');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
-const HtmlElementsPlugin = require('./html-elements-plugin');
+const HtmlElementsPlugin = require('./html-elements-plugin/index');
 
 /*
  * Webpack Constants
@@ -251,7 +251,7 @@ module.exports = {
      * Dependencies: HtmlWebpackPlugin
      */
     new HtmlElementsPlugin({
-      headTags: require('./head-config.common')
+      headTags: require('./head-config.common.js')
     }),
 
   ],

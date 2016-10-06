@@ -23,6 +23,9 @@ task stage {
 
 task npmBuild(type: NpmTask) {
     args = ['run', 'build']
+    execOverrides {
+        it.workingDir = 'src/main/typescript'
+    }
 }
 
 npmBuild.dependsOn(npmInstall)
@@ -41,8 +44,6 @@ jar {
     baseName = 'springboot-workshop'
     version =  '0.1.0'
 }
-
-
 
 repositories {
     mavenCentral()

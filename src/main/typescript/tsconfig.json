@@ -9,7 +9,7 @@
     "sourceMap": true,
     "noEmitHelpers": true,
     "strictNullChecks": false,
-    "baseUrl": "./src",
+    "baseUrl": "../.",
     "paths": [
     ],
     "lib": [
@@ -28,7 +28,7 @@
     ]
   },
   "exclude": [
-    "node_modules",
+    "../../.",
     "dist"
   ],
   "awesomeTypescriptLoaderOptions": {
