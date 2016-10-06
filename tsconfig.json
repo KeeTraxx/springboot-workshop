@@ -9,7 +9,7 @@
     "sourceMap": true,
     "noEmitHelpers": true,
     "strictNullChecks": false,
-    "baseUrl": ".",
+    "baseUrl": "./src/main/typescript",
     "paths": {},
     "lib": [
       "dom",

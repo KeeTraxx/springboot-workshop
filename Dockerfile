@@ -18,8 +18,6 @@ ADD gradle /opt/app-root/src/gradle
 ADD build.gradle /opt/app-root/src/
 ADD src /opt/app-root/src/src
 
-RUN chmod 777 /opt/app-root/src -R
-
 # build
 RUN sh /opt/app-root/src/gradlew build
 

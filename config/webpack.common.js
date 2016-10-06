@@ -12,7 +12,7 @@ const helpers = require('./helpers');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
-const HtmlElementsPlugin = require('./html-elements-plugin');
+const HtmlElementsPlugin = require('./html-elements-plugin/index');
 const AssetsPlugin = require('assets-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 
@@ -59,9 +59,9 @@ module.exports = function(options) {
      */
     entry: {
 
-      'polyfills': './polyfills.browser.ts',
-      'vendor':    './vendor.browser.ts',
-      'main':      './main.browser.ts'
+      'polyfills': './src/main/typescript/polyfills.browser.ts',
+      'vendor':    './src/main/typescript/vendor.browser.ts',
+      'main':      './src/main/typescript/main.browser.ts'
 
     },
 
@@ -165,7 +165,7 @@ module.exports = function(options) {
         {
           test: /\.html$/,
           loader: 'raw-loader',
-          exclude: [helpers.root('src/index.html')]
+          exclude: [helpers.root('src/main/typescript/index.html')]
         },
 
         /* File loader for supporting images, for example, in CSS files.
@@ -196,7 +196,7 @@ module.exports = function(options) {
      */
     plugins: [
       new AssetsPlugin({
-        path: helpers.root('dist'),
+        path: helpers.root('build', 'resources', 'main', 'public'),
         filename: 'webpack-assets.json',
         prettyPrint: true
       }),
@@ -265,7 +265,7 @@ module.exports = function(options) {
        * See: https://github.com/ampedandwired/html-webpack-plugin
        */
       new HtmlWebpackPlugin({
-        template: './index.html',
+        template: './src/main/typescript/index.html',
         chunksSortMode: 'dependency'
       }),
 
@@ -292,7 +292,7 @@ module.exports = function(options) {
        * Dependencies: HtmlWebpackPlugin
        */
       new HtmlElementsPlugin({
-        headTags: require('./head-config.common')
+        headTags: require('./head-config.common.js')
       }),
 
     ],

@@ -21,33 +21,19 @@ task stage {
     dependsOn clean, build
 }
 
-task npmCustomInstall(type: NpmTask) {
-    args = ['install']
-    execOverrides {
-        it.workingDir = 'src/main/typescript'
-    }
+task npmBuild(type: NpmTask) {
+    args = ["run","build:prod"]
 }
 
-task npmCustomBuild(type: NpmTask) {
-    args = ['run', 'build:prod']
-    execOverrides {
-        it.workingDir = 'src/main/typescript'
-    }
-}
+npmBuild.dependsOn npmInstall
 
-task copyDist(type: Copy) {
-    from 'src/main/typescript/dist'
-    into 'src/main/resources/public'
-}
-copyDist.dependsOn npmCustomBuild
-npmCustomBuild.dependsOn npmCustomInstall
-
-processResources.dependsOn copyDist
+processResources.dependsOn npmBuild
 
 node {
     version = '6.5.0'
     npmVersion = '3.10.3'
     download = true
+    nodeModulesDir = file("${project.projectDir}")
 }
 
 jar {

@@ -6,7 +6,7 @@
     
 ## Step 2 - Create a new app
 
-    oc new-app https://github.com/KeeTraxx/springboot-workshop.git
+    oc new-app --strategy=docker https://github.com/KeeTraxx/springboot-workshop.git
     
 ## Step 3 - Create a route for your app
  
