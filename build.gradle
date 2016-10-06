@@ -21,18 +21,28 @@ task stage {
     dependsOn clean, build
 }
 
-task npmBuild(type: NpmTask) {
-    args = ['run', 'build']
+task npmCustomInstall(type: NpmTask) {
+    args = ['install']
     execOverrides {
         it.workingDir = 'src/main/typescript'
     }
 }
 
-npmBuild.dependsOn(npmInstall)
+task npmCustomBuild(type: NpmTask) {
+    args = ['run', 'build:prod']
+    execOverrides {
+        it.workingDir = 'src/main/typescript'
+    }
+}
 
-build.dependsOn(npmBuild)
-build.mustRunAfter clean
-processResources.dependsOn(npmBuild)
+task copyDist(type: Copy) {
+    from 'src/main/typescript/dist'
+    into 'src/main/resources/public'
+}
+copyDist.dependsOn npmCustomBuild
+npmCustomBuild.dependsOn npmCustomInstall
+
+processResources.dependsOn copyDist
 
 node {
     version = '6.5.0'
