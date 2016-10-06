@@ -13,9 +13,11 @@ USER 1001
 
 # add application source
 
-ADD . /opt/app-root/
+ADD . /opt/app-root/src
 
 # build
-RUN sh /opt/app-root/gradlew build
+#RUN sh /opt/app-root/src/gradlew build
 
-CMD java -Xmx64m -Xss1024k -jar /opt/app-root/build/libs/*.jar
+#CMD java -Xmx64m -Xss1024k -jar /opt/app-root/src/build/libs/*.jar
+
+CMD bash
