@@ -16,8 +16,6 @@ USER 1001
 ADD . /opt/app-root/src
 
 # build
-#RUN sh /opt/app-root/src/gradlew build
+RUN sh /opt/app-root/src/gradlew build
 
-#CMD java -Xmx64m -Xss1024k -jar /opt/app-root/src/build/libs/*.jar
-
-CMD bash
+CMD java -Xmx64m -Xss1024k -jar /opt/app-root/src/build/libs/*.jar
